@@ -8,7 +8,7 @@ export function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="scroll-mt-24 py-24 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <Reveal className="flex flex-col">
             <span className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan">Contact</span>
             <SplitText
@@ -19,8 +19,8 @@ export function Contact() {
               textAlign="left"
               splitType="chars"
               threshold={0.3}
-              duration={1.25}
-              delay={40}
+              duration={0.6}
+              delay={20}
               from={{ opacity: 0, y: 36 }}
               to={{ opacity: 1, y: 0 }}
             />
@@ -28,16 +28,6 @@ export function Contact() {
               Have a project in mind or want to collaborate? I'd love to hear from you.
             </p>
             <ContactInfo />
-
-            <div className="mt-8 rounded-2xl border border-edge bg-card/50 p-5">
-              <p className="flex items-center gap-3 text-sm text-slate-300">
-                <span className="relative inline-flex size-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-60" />
-                  <span className="relative inline-flex size-2.5 rounded-full bg-cyan" />
-                </span>
-                Currently accepting new projects — available to start this month.
-              </p>
-            </div>
           </Reveal>
 
           <Reveal delay={0.1}>

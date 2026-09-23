@@ -7,7 +7,7 @@ export function Skills() {
   const skills = useSiteData().skills
 
   return (
-    <section id="skills" aria-labelledby="skills-title" className="flex h-full scroll-mt-24 flex-col">
+    <section id="skills" aria-labelledby="skills-title" className="flex h-full min-w-0 scroll-mt-24 flex-col">
       <Reveal>
         <span className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan">Expertise</span>
         <h2 id="skills-title" className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink">

@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { ArrowRight, ImageOff, MessageCircle } from 'lucide-react'
-import { Badge } from '../components/Badge'
 import { Button } from '../components/Button'
 import { FloatingStat } from '../components/FloatingStat'
 import { SocialLinks } from '../components/SocialLinks'
@@ -17,7 +16,7 @@ export function Hero() {
   const enter = (delay: number) => ({
     initial: { opacity: 0, y: reduce ? 0 : 24 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] as const },
+    transition: { duration: 0.45, delay, ease: [0.21, 0.47, 0.32, 0.98] as const },
   })
 
   const stats = profile.heroStats
@@ -34,8 +33,8 @@ export function Hero() {
       textAlign="inherit"
       splitType="chars"
       threshold={0.1}
-      duration={0.9}
-      delay={45}
+      duration={0.5}
+      delay={16}
       charsClassName={chars}
       from={{ opacity: 0, y: 40 }}
       to={{ opacity: 1, y: 0 }}
@@ -44,12 +43,8 @@ export function Hero() {
 
   return (
     <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-16">
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8">
         <div className="relative z-10 max-w-xl lg:max-w-none">
-          <motion.div {...enter(0)}>
-            <Badge dot>{profile.badge}</Badge>
-          </motion.div>
-
           <motion.h1 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
             {headline(profile.headlinePre)}
             {' '}
@@ -62,11 +57,11 @@ export function Hero() {
             {headline(profile.headlinePost)}
           </motion.h1>
 
-          <motion.p {...enter(0.2)} className="mt-6 max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
+          <motion.p {...enter(0.1)} className="mt-6 max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
             {profile.bioShort}
           </motion.p>
 
-          <motion.div {...enter(0.3)} className="mt-8 flex flex-wrap items-center gap-4">
+          <motion.div {...enter(0.2)} className="mt-8 flex flex-wrap items-center gap-4">
             <Button
               href="#projects"
               size="lg"
@@ -80,7 +75,7 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          <motion.div {...enter(0.4)} className="mt-10">
+          <motion.div {...enter(0.3)} className="mt-10">
             <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Find me on</p>
             <SocialLinks links={profile.socialLinks} />
           </motion.div>

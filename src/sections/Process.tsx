@@ -26,7 +26,7 @@ export function Process() {
           animated
         />
 
-        <ol className="relative grid gap-6 lg:grid-cols-6 lg:gap-0">
+        <ol className="relative grid grid-cols-1 gap-6 lg:grid-cols-6 lg:gap-0">
           {/* Progress line (horizontal on desktop, vertical on mobile) */}
           <li
             aria-hidden="true"

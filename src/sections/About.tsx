@@ -22,7 +22,7 @@ export function About() {
   ]
 
   return (
-    <section id="about" aria-labelledby="about-title" className="flex h-full scroll-mt-24 flex-col">
+    <section id="about" aria-labelledby="about-title" className="flex h-full min-w-0 scroll-mt-24 flex-col">
       <Reveal>
         <span className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan">About</span>
         <h2 id="about-title" className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink">
@@ -34,9 +34,9 @@ export function About() {
         <GlassCard className="flex h-full flex-col p-7 md:p-9">
           <p className="text-base leading-relaxed text-ink/90 md:text-lg">{profile.bio}</p>
 
-          <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+          <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {rows.map((row) => (
-              <li key={row.label} className="flex items-center gap-3.5">
+              <li key={row.label} className="flex min-w-0 items-center gap-3.5">
                 <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-edge bg-cyan/5 text-cyan">
                   <row.icon className="size-[1.1rem]" aria-hidden="true" />
                 </span>

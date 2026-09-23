@@ -19,7 +19,7 @@ export function PortfolioPage() {
       <main>
         <Hero />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 pb-24 md:pb-28 lg:grid-cols-2 lg:gap-6">
+          <div className="grid grid-cols-1 gap-8 pb-24 md:pb-28 lg:grid-cols-2 lg:gap-6">
             <About />
             <Skills />
           </div>

@@ -20,8 +20,8 @@ function Title({ text, animated, className }: { text: string; animated: boolean;
       textAlign="inherit"
       splitType="chars"
       threshold={0.3}
-      duration={1.25}
-      delay={40}
+      duration={0.6}
+      delay={20}
       from={{ opacity: 0, y: 36 }}
       to={{ opacity: 1, y: 0 }}
     />

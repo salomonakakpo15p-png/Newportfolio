@@ -27,11 +27,11 @@ export interface SplitTextProps {
 const SplitText: React.FC<SplitTextProps> = ({
   text,
   className = '',
-  delay = 50,
-  duration = 1.25,
+  delay = 22,
+  duration = 0.6,
   ease = 'power3.out',
   splitType = 'chars',
-  from = { opacity: 0, y: 40 },
+  from = { opacity: 0, y: 28 },
   to = { opacity: 1, y: 0 },
   threshold = 0.1,
   rootMargin = '-100px',
@@ -53,13 +53,24 @@ const SplitText: React.FC<SplitTextProps> = ({
 
   useEffect(() => {
     if (document.fonts.status === 'loaded') {
-      setFontsLoaded(true);
-    } else {
-      document.fonts.ready.then(() => {
-        setFontsLoaded(true);
-      });
+      setFontsLoaded(true)
+      return
     }
-  }, []);
+    let done = false
+    const finish = () => {
+      if (!done) {
+        done = true
+        setFontsLoaded(true)
+      }
+    }
+    document.fonts.ready.then(finish).catch(finish)
+    // Don't let slow font loading delay the text animation.
+    const t = setTimeout(finish, 250)
+    return () => {
+      clearTimeout(t)
+      done = true
+    }
+  }, [])
 
   useGSAP(
     () => {

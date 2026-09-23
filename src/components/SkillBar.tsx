@@ -27,7 +27,7 @@ export function SkillBar({ name, level }: SkillBarProps) {
           initial={{ width: reduce ? `${level}%` : '0%' }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         />
       </div>
     </div>

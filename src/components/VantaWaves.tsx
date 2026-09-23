@@ -18,6 +18,10 @@ export function VantaWaves() {
           import('three'),
         ])
         if (cancelled) return
+        const isTouch = window.matchMedia?.('(pointer: coarse)').matches ?? false
+        const isSmall = window.innerWidth < 768
+        // On touch screens: leave scrolling untouched and render at reduced
+        // resolution so the page stays smooth on phones and tablets.
         const walk = (v: unknown, depth: number): unknown => {
           if (!v || typeof v !== 'object' || depth > 4) return v
           const keys = Object.keys(v as object)
@@ -38,17 +42,17 @@ export function VantaWaves() {
         effect = ctor({
           el,
           THREE,
-          mouseControls: true,
-          touchControls: true,
+          mouseControls: isTouch ? false : true,
+          touchControls: false,
           gyroControls: false,
           minHeight: 200,
           minWidth: 200,
           scale: 1,
-          scaleMobile: 1,
+          scaleMobile: isSmall ? 0.5 : 1,
           color: 0x1c39,
           shininess: 84,
-          waveHeight: 15,
-          waveSpeed: 1.15,
+          waveHeight: isSmall ? 12 : 15,
+          waveSpeed: isSmall ? 0.9 : 1.15,
           zoom: 1.02,
         })
       } catch (error) {
