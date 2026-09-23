@@ -1,0 +1,73 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 827 >>
+stream
+q
+BT
+/F2 24 Tf
+1 0 0 1 50 720 Tm
+(SamDev) Tj
+/F2 14 Tf
+1 0 0 1 50 696 Tm
+(Full-Stack Developer) Tj
+/F1 10 Tf
+1 0 0 1 50 678 Tm
+(hello@abdullahtariq.dev  |  +971 50 000 0000  |  Dubai, UAE) Tj
+/F2 12 Tf
+1 0 0 1 50 630 Tm
+(PROFILE) Tj
+/F1 10 Tf
+1 0 0 1 50 612 Tm
+(I'm a full-stack developer focused on building modern, responsive and user-focused digital experiences.) Tj
+/F2 12 Tf
+1 0 0 1 50 550 Tm
+(SKILLS) Tj
+/F1 10 Tf
+1 0 0 1 50 532 Tm
+(JavaScript / TypeScript, React / Next.js, Node.js / Express,) Tj
+/F1 10 Tf
+1 0 0 1 50 517 Tm
+(Python / Django, SQL / MongoDB, HTML / CSS / Tailwind) Tj
+/F2 12 Tf
+1 0 0 1 50 470 Tm
+(EXPERIENCE) Tj
+/F2 10 Tf
+1 0 0 1 50 452 Tm
+(SamDev - Full-Stack Developer | 4+ years) Tj
+/F1 10 Tf
+1 0 0 1 50 434 Tm
+(Building fast, accessible, user-focused web products for startups and agencies.) Tj
+ET
+Q
+
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000001129 00000 n 
+0000001199 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1129
+%%EOF

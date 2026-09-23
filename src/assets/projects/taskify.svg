@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="300" viewBox="0 0 480 300" role="img" aria-label="Taskify AI project cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#061426"/>
+      <stop offset="1" stop-color="#020817"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#12E6F3"/>
+      <stop offset="1" stop-color="#22F3FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="300" fill="url(#bg)"/>
+  <circle cx="90" cy="60" r="140" fill="#12E6F3" opacity="0.07"/>
+  <circle cx="420" cy="250" r="100" fill="#12E6F3" opacity="0.06"/>
+  <g transform="translate(160,60)">
+    <rect x="0" y="0" width="160" height="180" rx="16" fill="#061426" stroke="url(#accent)" stroke-width="1.5" opacity="0.95"/>
+    <rect x="16" y="16" width="44" height="16" rx="8" fill="#12E6F3" opacity="0.9"/>
+    <rect x="70" y="21" width="74" height="6" rx="3" fill="#22F3FF" opacity="0.35"/>
+    <rect x="16" y="48" width="16" height="16" rx="4" fill="none" stroke="#22F3FF" stroke-width="1.5"/>
+    <rect x="42" y="53" width="102" height="6" rx="3" fill="#22F3FF" opacity="0.3"/>
+    <rect x="16" y="80" width="16" height="16" rx="4" fill="none" stroke="#22F3FF" stroke-width="1.5"/>
+    <rect x="42" y="85" width="80" height="6" rx="3" fill="#22F3FF" opacity="0.3"/>
+    <rect x="16" y="112" width="16" height="16" rx="4" fill="none" stroke="#22F3FF" stroke-width="1.5"/>
+    <rect x="42" y="117" width="90" height="6" rx="3" fill="#22F3FF" opacity="0.3"/>
+    <rect x="52" y="148" width="56" height="16" rx="8" fill="none" stroke="#12E6F3" stroke-width="1.2"/>
+    <text x="80" y="160" font-family="Arial, sans-serif" font-size="10" fill="#22F3FF" text-anchor="middle">TASKIFY</text>
+  </g>
+</svg>
