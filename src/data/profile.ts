@@ -1,5 +1,3 @@
-import photo from '../assets/hero.png'
-
 export interface SocialLink {
   label: string
   url: string
@@ -43,7 +41,7 @@ export const profile: Profile = {
   bioShort:
     "I'm a full-stack developer focused on building modern, responsive and user-focused digital experiences. I turn complex problems into clean, scalable products.",
   bio: "I'm a full-stack developer focused on building modern, responsive and user-focused digital experiences. For over 4 years I've helped startups, agencies and product teams ship reliable web applications — from first wireframe to a smooth production launch. I care deeply about performance, accessibility and the details that make software feel effortless.",
-  photo,
+  photo: '/mon-profil.jpg',
   location: 'Dubai, UAE',
   email: 'hello@abdullahtariq.dev',
   phone: '+971 50 000 0000',
