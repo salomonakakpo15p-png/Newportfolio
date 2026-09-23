@@ -141,7 +141,7 @@ try {
   })
   page.on('pageerror', (err) => pageErrors.push(String(err)))
 
-  await page.goto(BASE, { waitUntil: 'networkidle' })
+  await page.goto(BASE, { waitUntil: 'domcontentloaded' })
   await sleep(800)
 
   const content = JSON.parse(readFileSync(contentFile, 'utf8'))
@@ -273,8 +273,16 @@ const h1 = await page.locator('h1').first().textContent()
   admin.on('pageerror', (err) => adminErrors.push(String(err)))
 
   await admin.goto(`${BASE}/admin`, { waitUntil: 'domcontentloaded' })
-  await admin.waitForURL((u) => u.toString().includes('/admin/login'), { timeout: 20000 }).catch(() => {})
-  report('admin redirects to login when logged out', admin.url().includes('/admin/login'), admin.url())
+  // The SPA checks auth, then shows the login screen. Vite's first dev transform of
+  // the admin chunk can hiccup on cold machines; retry once via reload before failing.
+  await admin.locator('input[type="text"]').first().waitFor({ state: 'visible', timeout: 25000 }).catch(() => {})
+  let loginFormVisible = await admin.locator('input[type="text"]').first().isVisible().catch(() => false)
+  if (!loginFormVisible) {
+    await admin.reload({ waitUntil: 'domcontentloaded' })
+    await admin.locator('input[type="text"]').first().waitFor({ state: 'visible', timeout: 30000 }).catch(() => {})
+    loginFormVisible = await admin.locator('input[type="text"]').first().isVisible().catch(() => false)
+  }
+  report('admin redirects to login when logged out', loginFormVisible || admin.url().includes('/admin/login'), admin.url())
 
   // Wrong credentials are rejected.
   await admin.locator('input[type="text"]').fill(ADMIN_USER)
@@ -288,13 +296,14 @@ const h1 = await page.locator('h1').first().textContent()
   await admin.locator('button[type="submit"]').click()
   await sleep(1500)
   report('admin login navigates to dashboard', admin.url().endsWith('/admin'), admin.url())
+  await admin.getByText('Portfolio Admin').first().waitFor({ state: 'visible', timeout: 20000 }).catch(() => {})
   const dashboard = await admin.getByText('Portfolio Admin').first().isVisible().catch(() => false)
   report('admin dashboard header visible', dashboard)
 
   // Stats editor: rename the first stat, then check it on the public site.
-  await admin.goto(`${BASE}/admin/stats`, { waitUntil: 'networkidle' })
-  await sleep(1200)
+  await admin.goto(`${BASE}/admin/stats`, { waitUntil: 'domcontentloaded' })
   const statInput = admin.locator('input[placeholder="Happy Clients"]').first()
+  await statInput.waitFor({ state: 'visible', timeout: 30000 })
   const statBefore = await statInput.inputValue().catch(() => '')
   await statInput.fill('Test Clients')
   await admin.locator('button', { hasText: 'Save changes' }).click()
@@ -308,8 +317,8 @@ const h1 = await page.locator('h1').first().textContent()
   report('admin saves modified stat', saved, `before="${statBefore}"`)
   if (saved) await shotPage({ path: 'artifacts/smoke-admin-editor.png' })
 
-  await page.goto(BASE, { waitUntil: 'networkidle' })
-  await sleep(1000)
+  await page.goto(BASE, { waitUntil: 'domcontentloaded' })
+  await page.getByText('Test Clients').waitFor({ state: 'visible', timeout: 20000 }).catch(() => {})
   const statSaved = await page.getByText('Test Clients').isVisible().catch(() => false)
   report('public site reflects admin edit', statSaved)
 

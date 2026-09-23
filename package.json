@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "node scripts/generate-cv.mjs",
+    "prebuild": "node scripts/build-content.mjs && node scripts/generate-cv.mjs",
     "dev": "node scripts/dev.mjs",
     "dev:all": "node scripts/dev.mjs",
     "dev:only": "vite",

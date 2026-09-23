@@ -1,8 +1,9 @@
 import { useSyncExternalStore } from 'react'
 import { defaultSiteData, mergeContent } from './site-data'
 import type { SiteData } from './site-data'
+import embeddedContent from '../generated/content.json'
 
-let data: SiteData = defaultSiteData
+let data: SiteData = mergeContent(defaultSiteData, embeddedContent as Partial<SiteData>)
 let started = false
 const listeners = new Set<() => void>()
 
