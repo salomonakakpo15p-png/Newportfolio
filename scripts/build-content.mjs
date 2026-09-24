@@ -6,6 +6,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const source = join(root, 'server', 'data', 'content.json')
 const outDir = join(root, 'src', 'generated')
 const output = join(outDir, 'content.json')
+const seedDir = join(root, 'server')
+const seedOutput = join(seedDir, 'seed-content.json')
 
 if (!existsSync(source)) {
   console.log('[build-content] server/data/content.json absent (CI) — garde le snapshot committé.')
@@ -23,4 +25,5 @@ try {
 
 mkdirSync(outDir, { recursive: true })
 writeFileSync(output, JSON.stringify(parsed))
-console.log(`[build-content] snapshot embarqué écrit → src/generated/content.json`)
+writeFileSync(seedOutput, JSON.stringify(parsed))
+console.log(`[build-content] snapshot embarqué écrit → src/generated/content.json + server/seed-content.json`)
