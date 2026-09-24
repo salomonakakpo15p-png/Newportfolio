@@ -68,7 +68,7 @@ async function streamToString(stream) {
 export async function getContent() {
   if (blobEnabled()) {
     try {
-      const entry = await get(BLOB_CONTENT_KEY, { access: 'private', useCache: false })
+      const entry = await get(BLOB_CONTENT_KEY, { access: 'public', useCache: false })
       if (entry) {
         const parsed = JSON.parse(await streamToString(entry.stream))
         if (parsed && typeof parsed === 'object') return parsed
@@ -88,7 +88,7 @@ export async function updateCollection(name, value) {
   content[name] = structuredClone(value)
   if (blobEnabled()) {
     await put(BLOB_CONTENT_KEY, JSON.stringify(content, null, 2), {
-      access: 'private',
+      access: 'public',
       allowOverwrite: true,
       addRandomSuffix: false,
       contentType: 'application/json',

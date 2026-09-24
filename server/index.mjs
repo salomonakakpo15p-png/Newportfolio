@@ -23,6 +23,7 @@ const app = express()
 const PORT = Number(process.env.PORT) || 4000
 const rootDir = dirname(fileURLToPath(import.meta.url))
 
+if (process.env.VERCEL === '1') app.set('trust proxy', 1)
 app.disable('x-powered-by')
 app.use(
   cors({
