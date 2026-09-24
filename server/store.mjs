@@ -1,11 +1,9 @@
 import { readFileSync, writeFileSync, mkdirSync, renameSync } from 'node:fs'
-import { createRequire } from 'node:module'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { randomBytes } from 'node:crypto'
 import { get, put } from '@vercel/blob'
-
-const require = createRequire(import.meta.url)
+import bundledSeed from './seed-data.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const dataDir = join(here, 'data')
@@ -26,20 +24,10 @@ export function blobEnabled() {
 
 // Bundled content snapshot (committed by scripts/build-content.mjs). Used to
 // seed the store on Vercel, where the local server/data/ file does not exist.
-// The file lives next to this module so the serverless tracer includes it
-// (a CommonJS require of a relative .json is the canonical traced pattern).
-function readSeed() {
-  try {
-    return require('./seed-content.json')
-  } catch {
-    /* fall through to the frontend snapshot below */
-  }
-  try {
-    const file = join(here, '..', 'src', 'generated', 'content.json')
-    return JSON.parse(readFileSync(file, 'utf8'))
-  } catch {
-    return {}
-  }
+// A static import of a sibling .mjs module is always included in the serverless
+// bundle (module graph edge), so the seed is guaranteed to be available.
+export function readSeed() {
+  return bundledSeed
 }
 
 function readLocal() {

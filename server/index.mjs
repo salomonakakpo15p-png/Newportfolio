@@ -43,7 +43,9 @@ app.use(function securityHeaders(_req, res, next) {
 // ------------------------- Content (public) -------------------------
 
 app.get('/api/content', async (_req, res) => {
-  res.json(await getContent())
+  const content = await getContent()
+  res.setHeader('x-content-keys', String(Object.keys(content).length))
+  res.json(content)
 })
 
 // ------------------------- Uploads -------------------------
