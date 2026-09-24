@@ -2,7 +2,7 @@ export const site = {
   title: 'SamDev — Software Developer',
   description:
     'Portfolio of SamDev, a full-stack developer building modern, responsive and user-focused digital experiences. Explore projects, skills and get in touch.',
-  url: 'https://abdullahtariq.dev',
+  url: 'https://samdev-seven.vercel.app',
   author: 'SamDev',
   ogImage: '/og-image.png',
   locale: 'en_US',
