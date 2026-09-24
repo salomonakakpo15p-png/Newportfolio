@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer'
 import { existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getContent, updateCollection } from './store.mjs'
+import { getContent, saveUpload, updateCollection, uploadsDir } from './store.mjs'
 import {
   authEnabled,
   login,
@@ -15,7 +15,6 @@ import {
   readSessionCookie,
   setSessionCookie,
   upload,
-  uploadsDir,
   validSession,
 } from './auth.mjs'
 import { validateCollection } from './validate.mjs'
@@ -43,8 +42,8 @@ app.use(function securityHeaders(_req, res, next) {
 
 // ------------------------- Content (public) -------------------------
 
-app.get('/api/content', (_req, res) => {
-  res.json(getContent())
+app.get('/api/content', async (_req, res) => {
+  res.json(await getContent())
 })
 
 // ------------------------- Uploads -------------------------
@@ -107,26 +106,36 @@ function adminWriteCheck(req, res, next) {
   next()
 }
 
-app.get('/api/admin/content', requireAdmin, (_req, res) => {
-  res.json(getContent())
+app.get('/api/admin/content', requireAdmin, async (_req, res) => {
+  res.json(await getContent())
 })
 
-app.put('/api/admin/content/:collection', requireAdmin, adminWriteCheck, (req, res) => {
+app.put('/api/admin/content/:collection', requireAdmin, adminWriteCheck, async (req, res) => {
   try {
     const name = String(req.params.collection)
     const value = validateCollection(name, req.body?.value)
-    updateCollection(name, value)
+    await updateCollection(name, value)
     res.json({ message: 'Saved', collection: name, value })
   } catch (error) {
     res.status(400).json({ message: error instanceof Error ? error.message : 'Invalid content.' })
   }
 })
 
-app.post('/api/admin/upload', requireAdmin, adminWriteCheck, upload.single('file'), (req, res) => {
-  if (!req.file) return res.status(400).json({ message: 'No file uploaded.' })
-  const url = `/uploads/${req.file.filename}`
-  res.json({ url, message: 'Uploaded' })
-})
+app.post(
+  '/api/admin/upload',
+  requireAdmin,
+  adminWriteCheck,
+  upload.single('file'),
+  async (req, res) => {
+    if (!req.file) return res.status(400).json({ message: 'No file uploaded.' })
+    try {
+      const { url } = await saveUpload(req.file)
+      res.json({ url, message: 'Uploaded' })
+    } catch (error) {
+      res.status(500).json({ message: error instanceof Error ? error.message : 'Upload failed.' })
+    }
+  },
+)
 
 app.use((error, _req, res, next) => {
   if (error instanceof multerError) {
@@ -247,11 +256,15 @@ app.use((_req, res) => {
   res.status(404).json({ message: 'Not found.' })
 })
 
-app.listen(PORT, () => {
-  console.log(`Portfolio server listening on http://localhost:${PORT}`)
-  if (!authEnabled()) {
-    console.warn(
-      'Warning: ADMIN_PASSWORD is not set — admin login is disabled. See .env.example.',
-    )
-  }
-})
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`Portfolio server listening on http://localhost:${PORT}`)
+    if (!authEnabled()) {
+      console.warn(
+        'Warning: ADMIN_PASSWORD is not set — admin login is disabled. See .env.example.',
+      )
+    }
+  })
+}
+
+export { app }
