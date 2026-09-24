@@ -73,7 +73,9 @@ export async function getContent() {
     }
     return structuredClone(readSeed())
   }
-  return readLocal()
+  const local = readLocal()
+  if (local && Object.keys(local).length > 0) return local
+  return structuredClone(readSeed())
 }
 
 export async function updateCollection(name, value) {
