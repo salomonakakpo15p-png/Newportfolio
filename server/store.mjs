@@ -7,7 +7,12 @@ import { get, put } from '@vercel/blob'
 const here = dirname(fileURLToPath(import.meta.url))
 const dataDir = join(here, 'data')
 const storeFile = join(dataDir, 'content.json')
-mkdirSync(dataDir, { recursive: true })
+try {
+  mkdirSync(dataDir, { recursive: true })
+} catch {
+  // Read-only filesystem (e.g. serverless) — local writes are only used
+  // when Blob storage is disabled.
+}
 
 const BLOB_CONTENT_KEY = 'portfolio/content.json'
 const BLOB_UPLOAD_PREFIX = 'portfolio/uploads/'
@@ -37,7 +42,11 @@ function readLocal() {
 
 function writeLocal(content) {
   const tmp = `${storeFile}.tmp`
-  mkdirSync(dataDir, { recursive: true })
+  try {
+    mkdirSync(dataDir, { recursive: true })
+  } catch {
+    return
+  }
   writeFileSync(tmp, JSON.stringify(content, null, 2), 'utf8')
   renameSync(tmp, storeFile)
 }
@@ -93,7 +102,11 @@ export async function getCollection(name) {
 
 export function uploadsDir() {
   const dir = join(here, 'uploads')
-  mkdirSync(dir, { recursive: true })
+  try {
+    mkdirSync(dir, { recursive: true })
+  } catch {
+    // Read-only filesystem check (serverless) — harmless.
+  }
   return dir
 }
 
