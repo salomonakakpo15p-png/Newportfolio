@@ -19,7 +19,12 @@ const BLOB_CONTENT_KEY = 'portfolio/content.json'
 const BLOB_UPLOAD_PREFIX = 'portfolio/uploads/'
 
 export function blobEnabled() {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN)
+  // Static token (Vercel Blob "read/write token") OR OIDC credential mode
+  // (BLOB_STORE_ID + the VERCEL_OIDC_TOKEN auto-injected in Functions).
+  return Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN ||
+      (process.env.BLOB_STORE_ID && process.env.VERCEL_OIDC_TOKEN),
+  )
 }
 
 // Bundled content snapshot (committed by scripts/build-content.mjs). Used to
