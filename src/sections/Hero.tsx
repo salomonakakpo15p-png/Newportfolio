@@ -123,20 +123,9 @@ export function Hero() {
                 className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent"
               />
             </div>
-
-            {/* Desktop floating stats */}
-            <div className="absolute top-6 -left-6 hidden md:block">
-              {stats[0] && <FloatingStat stat={stats[0]} className="animate-float" />}
-            </div>
-            <div className="absolute -right-4 top-1/2 hidden md:block lg:right-0">
-              {stats[1] && <FloatingStat stat={stats[1]} className="animate-float-slow" />}
-            </div>
-            <div className="absolute -bottom-5 left-6 hidden md:block">
-              {stats[2] && <FloatingStat stat={stats[2]} className="animate-float" />}
-            </div>
           </motion.div>
 
-          {/* Mobile floating stats in-flow, never overflowing */}
+            {/* Mobile floating stats in-flow, never overflowing */}
           <ul className="mt-8 grid grid-cols-3 gap-2.5 md:hidden" aria-label="Quick statistics">
             {stats.map((stat) => (
               <li key={stat.label}>
