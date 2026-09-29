@@ -67,7 +67,11 @@ export function ContactForm() {
     if (Object.keys(nextErrors).length > 0) return
 
     if (values.website.trim() !== '') return
-    if (Date.now() - submittedAt.current < 5000) return
+    if (Date.now() - submittedAt.current < 5000) {
+      setStatus('error')
+      setErrorMessage('Please wait a few seconds before sending another message.')
+      return
+    }
     submittedAt.current = Date.now()
 
     setStatus('submitting')

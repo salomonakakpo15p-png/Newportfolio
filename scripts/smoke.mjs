@@ -212,8 +212,11 @@ const h1 = await page.locator('h1').first().textContent()
 
   await page.locator('#contact-email').fill('jane@company.com')
   await page.locator('#contact button[type="submit"]').click()
-  await sleep(900)
-  const success = await page.getByText('Message sent!').isVisible().catch(() => false)
+  const success = await page
+    .getByText('Message sent!')
+    .waitFor({ timeout: 12000 })
+    .then(() => true)
+    .catch(() => false)
   report('form submits successfully via API', success)
   await shotPage({ path: 'artifacts/smoke-mobile-contact.png' })
 
