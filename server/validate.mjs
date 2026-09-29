@@ -33,7 +33,7 @@ export const validators = {
       headlinePost: (v) => str(v, 200),
       bioShort: (v) => str(v, 1000),
       bio: (v) => str(v, 4000),
-      photo: (v) => str(v, 500),
+      photo: (v) => str(v, 100000),
       location: (v) => str(v, 160),
       email: (v) => str(v, 254),
       phone: (v) => str(v, 60),
@@ -75,7 +75,7 @@ export const validators = {
         slug: (x) => str(x, 200),
         category: (x) => str(x, 120),
         description: (x) => str(x, 1000),
-        image: (x) => str(x, 500),
+        image: (x) => str(x, 100000),
         technologies: (x) =>
           Array.isArray(x) ? x.map((t) => str(t, 60)).filter(Boolean).slice(0, 12) : [],
         liveUrl: (x) => str(x, 500),
@@ -95,7 +95,7 @@ export const validators = {
         company: (x) => str(x, 120),
         quote: (x) => str(x, 2000),
         rating: (x) => Math.min(5, Math.max(1, Math.round(num(x)))),
-        avatar: (x) => str(x, 500),
+        avatar: (x) => str(x, 100000),
       }),
     ).slice(0, 30)
   },

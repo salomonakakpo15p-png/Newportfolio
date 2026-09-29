@@ -19,6 +19,7 @@ export function TestimonialCarousel({
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const [dragX, setDragX] = useState(0)
+  const [brokenAvatar, setBrokenAvatar] = useState<string | null>(null)
   const pointerStart = useRef<number | null>(null)
   const reduce = useReducedMotion()
   const count = testimonials.length
@@ -95,7 +96,7 @@ export function TestimonialCarousel({
                 “{active.quote}”
               </blockquote>
               <div className="mt-6 flex items-center gap-4">
-                {active.avatar ? (
+                {active.avatar && brokenAvatar !== active.id ? (
                   <img
                     src={active.avatar}
                     alt=""
@@ -103,6 +104,7 @@ export function TestimonialCarousel({
                     height={48}
                     loading="lazy"
                     decoding="async"
+                    onError={() => setBrokenAvatar(active.id)}
                     className="size-12 rounded-full border border-edge object-cover"
                   />
                 ) : (

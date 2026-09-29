@@ -30,7 +30,7 @@ export function Process() {
           {/* Progress line (horizontal on desktop, vertical on mobile) */}
           <li
             aria-hidden="true"
-            className="absolute left-[1.125rem] top-0 h-full w-px bg-gradient-to-b from-cyan/50 via-edge to-transparent lg:left-0 lg:top-[2.25rem] lg:h-px lg:w-full lg:bg-gradient-to-r"
+            className="absolute left-[1.75rem] top-0 h-full w-px bg-gradient-to-b from-cyan/50 via-edge to-transparent lg:left-0 lg:top-[-2px] lg:h-px lg:w-full lg:bg-gradient-to-r"
           />
 
           {processSteps.map((step, index) => {
@@ -40,14 +40,14 @@ export function Process() {
               <li key={step.number} className={`relative pl-14 lg:flex-1 lg:pl-0 ${isLast ? '' : ''}`}>
                 <Reveal delay={index * 0.07} className="h-full">
                   <GlassCard interactive className="h-full p-6 lg:text-center">
-                    <div className="absolute left-1 top-1 flex size-9 items-center justify-center rounded-full border border-cyan/40 bg-void text-cyan lg:left-1/2 lg:-top-10 lg:size-11 lg:-translate-x-1/2">
-                      <Icon className="size-4 lg:size-5" aria-hidden="true" />
-                    </div>
                     <p className="font-display text-sm font-semibold text-cyan/80 lg:mb-1">{step.number}</p>
                     <h3 className="mt-1 font-display text-lg font-semibold text-ink">{step.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-slate-400">{step.description}</p>
                   </GlassCard>
                 </Reveal>
+                <div className="absolute left-2.5 top-1 flex size-9 items-center justify-center rounded-full border border-cyan/40 bg-void text-cyan lg:left-1/2 lg:-top-6 lg:size-11 lg:-translate-x-1/2">
+                  <Icon className="size-4 lg:size-5" aria-hidden="true" />
+                </div>
               </li>
             )
           })}
