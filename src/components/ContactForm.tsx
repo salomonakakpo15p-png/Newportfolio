@@ -1,5 +1,5 @@
 import { CheckCircle2, Loader2, Send } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { cn } from '../lib/utils'
 
@@ -43,6 +43,13 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const submittedAt = useRef(0)
+  const successRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (status === 'success') {
+      successRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [status])
 
   const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT ?? '/api/contact'
 

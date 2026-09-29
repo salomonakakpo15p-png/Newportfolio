@@ -17,7 +17,7 @@ export function ContactInfo() {
     {
       label: 'Phone',
       value: profile.phone,
-      href: `tel:${profile.phone.replace(/[^+\d]/g, '')}`,
+      href: `https://wa.me/${profile.phone.replace(/\D/g, '')}`,
       icon: Phone,
     },
     { label: 'Location', value: profile.location, icon: MapPin },
